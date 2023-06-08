@@ -1,0 +1,33 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Supplier list{% endblock %}
+
+{% block body %}
+    <h1>Supplier list</h1>
+    <div class="container">
+        <table class="table table-striped">
+            <thead>
+            <tr>
+                <th scope="col">ID</th>
+                <th scope="col">Supplier Name</th>
+                <th scope="col">Importer</th>
+                <th scope="col">Actions</th>
+
+            </tr>
+            </thead>
+            <tbody>
+            {% for supplier in suppliers %}
+                <tr>
+                    <td>{{ supplier.id }}</td>
+                    <td>{{ supplier.supName }}</td>
+                    <td>{{ supplier.importer?"True":"False" }}</td>
+                    <td>
+                        <a class="btn btn-warning" href="#">Edit</a>
+                        <a class="btn btn-danger" href="#">Delete</a>
+                    </td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    </div>
+{% endblock %}
