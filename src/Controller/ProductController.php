@@ -32,10 +32,13 @@ class ProductController extends AbstractController
                 'attr' => ['class' => 'form-control']])
             ->add('save', SubmitType::class, ['attr' => ['class' => 'btn btn-success']])
             ->getForm();
-        $form->handleRequest($request);
-        $productRepository->save($product, true);
 
-        $this->addFlash('success', 'Adding product successfully!');
+        $form->handleRequest($request);
+        if ($form->isSubmitted() && $form->isValid()){
+            $productRepository->save($product, true);
+//            $this->addFlash('success', 'Adding product successfully!');
+//            return $this->redirectToRoute('app_product_add');
+        }
 
         return $this->render('product/add.html.twig', [
             'form' => $form

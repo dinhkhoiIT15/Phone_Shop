@@ -12,6 +12,19 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 
 class AddSupplierType extends AbstractType
 {
+    public function buildForm(FormBuilderInterface $builder, array $options): void
+    {
+        $builder
+            ->add('sup_name', TextType::class, ['label_attr' => ['class' => 'form-label'],
+                'attr' => ['class' => 'form-control']])
+            ->add('importer', ChoiceType::class, [
+                'choice' => [
+                    'Importer' => 0,
+                    'Local' => 1
+                ]
+            ]);
+    }
+
     public function configureOptions(OptionsResolver $resolver): void
     {
         $resolver->setDefaults([

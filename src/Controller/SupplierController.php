@@ -19,4 +19,24 @@ class SupplierController extends AbstractController
             'controller_name' => 'SupplierController',
         ]);
     }
+
+    #[Route('/supplier/add', name: 'app_supplier_add')]
+    public function addSupplierAction(Request $request, SupplierRepository $supplierRepository): Response
+    {
+        $supplier = new Supplier();
+
+        $form = $this->createForm(AddSupplierType::class, $supplier);
+
+        $form->handleRequest($request);
+        if($form->isSubmitted() && $form->isValid()){
+            $supplier = $form->getData();
+            $supplierRepository->save($supplier, true);
+            $this->addFlash('success', 'Adding supplier successfully!');
+            return $this->redirectToRoute('app_supplier_add');
+        }
+
+        return $this->render('supplier/add.html.twig', [
+            'form' => $form
+        ]);
+    }
 }
