@@ -51,4 +51,13 @@ class PhoneController extends AbstractController
              'phones' => $phones
          ]);
     }
+
+    #[Route('/phone/{name}', name: 'app_phone_by_name')]
+    public function getPhoneByName(PhoneRepository $phoneRepository, string $name): Response
+    {
+        $phones = $phoneRepository->getPhoneByName($name);
+        return $this->render('phone/all.html.twig', [
+            'phones' => $phones
+        ]);
+    }
 }

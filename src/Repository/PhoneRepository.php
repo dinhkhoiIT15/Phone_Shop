@@ -39,6 +39,17 @@ class PhoneRepository extends ServiceEntityRepository
         }
     }
 
+    public function getPhoneByName(string $name): array
+    {
+        return $this->createQueryBuilder('p')
+            ->where('p.phone_name LIKE :name')
+            ->setParameter('name', '%' .$name. '%')
+            ->orderBy('p.date', 'asc')
+            ->getQuery()
+            ->getResult();
+    }
+
+
 //    /**
 //     * @return Phone[] Returns an array of Phone objects
 //     */
