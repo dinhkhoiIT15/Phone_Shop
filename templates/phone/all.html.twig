@@ -1,0 +1,36 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Phone list{% endblock %}
+
+{% block body %}
+    <h1>Phone list</h1>
+    <div class="container">
+        <table class="table table-striped">
+            <thead>
+            <tr>
+                <th scope="col">Id</th>
+                <th scope="col">Phone Name</th>
+                <th scope="col">Product ID</th>
+                <th scope="col">Price</th>
+                <th scope="col">Date</th>
+                <th scope="col">Actions</th>
+            </tr>
+            </thead>
+            <tbody>
+            {% for phone in phones %}
+                <tr>
+                    <td>{{ phone.id }}</td>
+                    <td>{{ phone.phoneName }}</td>
+                    <td>{{ phone.Product.id }}</td>
+                    <td>{{ phone.price}}</td>
+                    <td>{{ phone.date|date('d/m/y H:i')}}</td>
+                    <td>
+                        <a class="btn btn-warning" href="#">Edit</a>
+                        <a class="btn btn-danger" href="#">Delete</a>
+                    </td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    </div>
+{% endblock %}

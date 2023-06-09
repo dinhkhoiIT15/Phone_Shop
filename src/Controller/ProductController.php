@@ -19,7 +19,7 @@ class ProductController extends AbstractController
     public function index(): Response
     {
         return $this->render('product/index.html.twig', [
-            'controller_name' => 'ProductController',
+            'product' => 'ProductController',
         ]);
     }
 
@@ -43,5 +43,24 @@ class ProductController extends AbstractController
         return $this->render('product/add.html.twig', [
             'form' => $form
         ]);
+    }
+
+    #[Route('/product/all', name: 'app_product_all')]
+    public function getAllProduct(ProductRepository $productRepository): Response
+    {
+        $products = $productRepository->findAll();
+        //dd($product);
+
+        return $this->render('product/all.html.twig', [
+            'products' => $products
+        ]);
+    }
+
+    #[Route('/product/delete/{id}', name: 'app_product_delete')]
+    public function deleteAction(Product $product, ProductRepository $productRepository): Response
+    {
+        $productRepository->remove($product, true);
+
+        return $this->redirectToRoute('app_product_all');
     }
 }

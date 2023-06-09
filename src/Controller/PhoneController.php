@@ -41,4 +41,14 @@ class PhoneController extends AbstractController
             'form' => $form
         ]);
     }
+
+    #[Route('/phone/all', name: 'app_phone_all')]
+    public function getAllPhone(PhoneRepository $phoneRepository): Response
+    {
+        $phones = $phoneRepository->findAll();
+        //dd($phones);
+         return $this->render('phone/all.html.twig', [
+             'phones' => $phones
+         ]);
+    }
 }
