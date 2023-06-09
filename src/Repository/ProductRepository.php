@@ -44,7 +44,6 @@ class ProductRepository extends ServiceEntityRepository
         return $this->createQueryBuilder('p')
             ->where('p.pro_name LIKE :name')
             ->setParameter('name', '%' .$name. '%')
-            ->orderBy('p.date', 'asc')
             ->getQuery()
             ->getResult();
     }
