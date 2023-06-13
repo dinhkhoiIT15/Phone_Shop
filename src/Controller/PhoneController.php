@@ -4,10 +4,12 @@ namespace App\Controller;
 
 use App\Entity\Customer;
 use App\Entity\Phone;
+use App\Entity\Product;
 use App\Form\AddCustomerType;
 use App\Form\AddPhoneType;
 use App\Repository\CustomerRepository;
 use App\Repository\PhoneRepository;
+use App\Repository\ProductRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -60,5 +62,13 @@ class PhoneController extends AbstractController
         return $this->render('phone/all.html.twig', [
             'phones' => $phones
         ]);
+    }
+
+    #[Route('/phone/delete/{id}', name: 'app_phone_delete')]
+    public function deleteAction(Phone $phone, PhoneRepository $phoneRepository): Response
+    {
+        $phoneRepository->remove($phone, true);
+
+        return $this->redirectToRoute('app_phone_all');
     }
 }

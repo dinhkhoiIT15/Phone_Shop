@@ -4,6 +4,7 @@ namespace App\Controller;
 
 use App\Entity\Product;
 use App\Form\AddProductType;
+use App\Repository\PhoneRepository;
 use App\Repository\ProductRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
@@ -62,5 +63,14 @@ class ProductController extends AbstractController
         $productRepository->remove($product, true);
 
         return $this->redirectToRoute('app_product_all');
+    }
+
+    #[Route('/product/{name}', name: 'app_product_by_name')]
+    public function getPhoneByName(ProductRepository $productRepository, string $name): Response
+    {
+        $products = $productRepository->getProductByName($name);
+        return $this->render('product/all.html.twig', [
+            'products' => $products
+        ]);
     }
 }
