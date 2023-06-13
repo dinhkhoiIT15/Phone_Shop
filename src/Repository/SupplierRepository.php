@@ -39,6 +39,15 @@ class SupplierRepository extends ServiceEntityRepository
         }
     }
 
+    public function getSupplierByName(string $name): array
+    {
+        return $this->createQueryBuilder('p')
+            ->where('p.sup_name LIKE :name')
+            ->setParameter('name', '%' .$name. '%')
+            ->getQuery()
+            ->getResult();
+    }
+
 //    /**
 //     * @return Supplier[] Returns an array of Supplier objects
 //     */

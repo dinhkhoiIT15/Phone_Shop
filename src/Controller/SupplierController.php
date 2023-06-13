@@ -5,6 +5,7 @@ namespace App\Controller;
 use App\Entity\Supplier;
 use App\Form\AddSupplierType;
 use App\Repository\CustomerRepository;
+use App\Repository\PhoneRepository;
 use App\Repository\SupplierRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -47,6 +48,14 @@ class SupplierController extends AbstractController
         $suppliers = $supplierRepository->findAll();
 //        dd($customers[0]->getPhoneNumber());
 
+        return $this->render('supplier/all.html.twig', [
+            'suppliers' => $suppliers
+        ]);
+    }
+    #[Route('/supplier/{name}', name: 'app_supplier_by_name')]
+    public function getPhoneByName(SupplierRepository $supplierRepository, string $name): Response
+    {
+        $suppliers = $supplierRepository->getSupplierByName($name);
         return $this->render('supplier/all.html.twig', [
             'suppliers' => $suppliers
         ]);
