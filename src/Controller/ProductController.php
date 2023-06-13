@@ -37,7 +37,7 @@ class ProductController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()){
             $productRepository->save($product, true);
 //            $this->addFlash('success', 'Adding product successfully!');
-//            return $this->redirectToRoute('app_product_add');
+            return $this->redirectToRoute('app_product_add');
         }
 
         return $this->render('product/add.html.twig', [

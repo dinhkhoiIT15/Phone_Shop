@@ -27,7 +27,7 @@ class CustomerController extends AbstractController
     public function getAllCustomer(CustomerRepository $customerRepository): Response
     {
         $customers = $customerRepository->findAll();
-//        dd($customers[0]->getPhoneNumber());
+//        dd($customers);
 
         return $this->render('customer/all.html.twig', [
             'customers' => $customers

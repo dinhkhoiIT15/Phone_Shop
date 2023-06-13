@@ -5,6 +5,7 @@ namespace App\Controller;
 use App\Entity\Customer;
 use App\Entity\Phone;
 use App\Form\AddCustomerType;
+use App\Form\AddPhoneType;
 use App\Repository\CustomerRepository;
 use App\Repository\PhoneRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -27,7 +28,7 @@ class PhoneController extends AbstractController
     {
         $phone = new Phone();
 
-        $form = $this->createForm(AddCustomerType::class, $phone);
+        $form = $this->createForm(AddPhoneType::class, $phone);
 
         $form->handleRequest($request);
         if($form->isSubmitted() && $form->isValid()){
