@@ -78,7 +78,6 @@ class ProductController extends AbstractController
     public function editAction(Request $request, ProductRepository $productRepository, Product $product): Response
     {
         $form = $this->createForm(AddProductType::class, $product);
-        //dd($shoe);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
@@ -86,7 +85,7 @@ class ProductController extends AbstractController
             $productRepository->save($product, true);
 
 
-            $this->addFlash('success', 'Customer information has been successfully updated');
+//            $this->addFlash('success', 'Customer information has been successfully updated');
             return $this->redirectToRoute('app_product_all');
         }
 

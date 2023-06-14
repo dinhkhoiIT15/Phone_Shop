@@ -23,7 +23,7 @@
                     <td>{{ customer.address }}</td>
                     <td>{{ customer.phoneNumber}}</td>
                     <td>
-                        <a class="btn btn-warning" href="#">Edit</a>
+                        <a class="btn btn-warning" href="{{ path('app_customer_edit', {'id': customer.id}) }}">Edit</a>
                         <a class="btn btn-danger" href="#">Delete</a>
                     </td>
                 </tr>

@@ -17,7 +17,7 @@ class AddCustomerType extends AbstractType
             ->add('name',TextType::class,['label_attr' => ['class' => 'form-label'], 'attr' => ['class' => 'form-control']])
             ->add('address',TextType::class,['label_attr' => ['class' => 'form-label'], 'attr' => ['class' => 'form-control']])
             ->add('phone_number',TextType::class,['label_attr' => ['class' => 'form-label'], 'attr' => ['class' => 'form-control']])
-            ->add('submit', SubmitType::class, ['attr' => ['class' => 'btn btn-success']]);
+            ->add('save', SubmitType::class, ['attr' => ['class' => 'btn btn-success']]);
         ;
     }
 
