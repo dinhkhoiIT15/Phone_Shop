@@ -21,8 +21,8 @@
                     <td>{{ supplier.supName }}</td>
                     <td>{{ supplier.importer?"True":"False" }}</td>
                     <td>
-                        <a class="btn btn-warning" href="#">Edit</a>
-                        <a class="btn btn-danger" href="#">Delete</a>
+                        <a class="btn btn-warning" href="{{ path('app_supplier_edit', {'id' :supplier.id}) }}">Edit</a>
+                        <a class="btn btn-danger" href="{{ path('app_supplier_delete',{'id':supplier.id}) }}">Delete</a>
                     </td>
                 </tr>
             {% endfor %}

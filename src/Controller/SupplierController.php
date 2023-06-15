@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use App\Entity\Customer;
 use App\Entity\Supplier;
 use App\Form\AddSupplierType;
 use App\Repository\CustomerRepository;
@@ -61,5 +62,10 @@ class SupplierController extends AbstractController
         ]);
     }
 
-
+    #[Route('/supplier/delete/{id}', name:'app_supplier_delete')]
+    public function deleteFunAction(SupplierRepository $supplierRepository, Supplier $supplier):Response
+    {
+        $supplierRepository->remove($supplier,true);
+        return $this->redirectToRoute('app_supplier_all');
+     }
 }
