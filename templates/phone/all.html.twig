@@ -24,8 +24,8 @@
                     <td>{{ phone.price}}</td>
                     <td>{{ phone.date|date('d/m/y H:i')}}</td>
                     <td>
-                        <a class="btn btn-warning" href="#">Edit</a>
-                        <a class="btn btn-danger" href="#">Delete</a>
+                        <a class="btn btn-warning" href="{{ path('app_phone_edit', {'id' :phone.id}) }}">Edit</a>
+                        <a class="btn btn-danger" href="{{ path('app_phone_delete', {'id' :phone.id}) }}">Delete</a>
                     </td>
                 </tr>
             {% endfor %}

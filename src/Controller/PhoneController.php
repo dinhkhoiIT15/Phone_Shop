@@ -67,17 +67,21 @@ class PhoneController extends AbstractController
     #[Route('phone/edit/{id}', name:'app_phone_edit')]
     public function editPhoneAction(Request $request,PhoneRepository $phoneRepository,Phone $phone): Response
     {
-        $phone=new Phone();
-        $form=$this->createForm(AddPhoneType::class,$phone);
+        $form = $this->createForm(AddPhoneType::class, $phone);
+        //dd($shoe);
         $form->handleRequest($request);
-        if($form->isSubmitted()&& $form->isValid()){
-            $phone=$form->getData();
-            $phoneRepository->save($phone,true);
-            //$this->editFlash('success','Adding Phone Successfully!');
-            return $this->redirectToRoute('app_phone_edit');
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $customer = $form->getData();
+            $phoneRepository->save($phone, true);
+
+
+            $this->addFlash('success', 'Phone information has been successfully updated');
+            return $this->redirectToRoute('app_phone_all');
         }
-        return $this->render('phone/edit.html.twig',[
-            'form'=>$form
+
+        return $this->render('phone/edit.html.twig', [
+            'form' => $form->createView()
         ]);
     }
 
