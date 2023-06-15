@@ -64,6 +64,39 @@ class PhoneController extends AbstractController
         ]);
     }
 
+    #[Route('/phone/add', name: 'app_phone_add')]
+    public function addPhoneAction(Request $request,PhoneRepository $phoneRepository): Response
+    {
+        $phone = new Phone();
+        $form =$this->createForm(AddPhoneType::class, $phone);
+        $form->handleRequest($request);
+        if($form->isSubmitted() && $form->isValid()){
+            $phone=$form->getData();
+            $phoneRepository->save($phone,true);
+            $this->addFlash('success', 'Adding Phone Successfully!');
+            return $this->redirectToRoute('app_phone_add');
+        }
+        return $this->render('phone/add.html.twig',[
+            'form'=>$form
+            ]);
+    }
+    #[Route('phone/edit', name:'app_phone_edit')]
+    public function editPhoneAction(Request $request,PhoneRepository $phoneRepository,Phone $phone): Response
+    {
+        $phone=new Phone();
+        $form=$this->createForm(AddPhoneType::class,$phone);
+        $form->handleRequest($request);
+        if($form->isSubmitted()&& $form->isValid()){
+            $phone=$form->getData();
+            $phoneRepository->save($phone,true);
+            //$this->editFlash('success','Adding Phone Successfully!');
+            return $this->redirectToRoute('app_phone_edit');
+        }
+        return $this->render('phone/edit.html.twig',[
+            'form'=>$form
+        ]);
+    }
+
     #[Route('/phone/delete/{id}', name: 'app_phone_delete')]
     public function deleteAction(Phone $phone, PhoneRepository $phoneRepository): Response
     {
