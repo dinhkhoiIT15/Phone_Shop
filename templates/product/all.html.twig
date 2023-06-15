@@ -10,8 +10,7 @@
             <tr>
                 <th scope="col">Id</th>
                 <th scope="col">Name</th>
-                <th scope="col">Action</th>
-{#                <th scope="col">Actions</th>#}
+                <th scope="col">Actions</th>
             </tr>
             </thead>
             <tbody>
@@ -20,8 +19,8 @@
                     <td>{{ product.id }}</td>
                     <td>{{ product.proName }}</td>
                     <td>
-                        <a class="btn btn-warning" href="">Edit</a>
-                        <a class="btn btn-danger" href="">Delete</a>
+                        <a class="btn btn-warning" href="{{ path('app_product_edit', {'id': product.id}) }}">Edit</a>
+                        <a class="btn btn-danger" href="{{ path('app_product_delete', {'id': product.id}) }}">Delete</a>
                     </td>
                 </tr>
             {% endfor %}

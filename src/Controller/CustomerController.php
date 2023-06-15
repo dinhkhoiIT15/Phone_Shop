@@ -9,6 +9,7 @@ use App\Form\AddSupplierType;
 use App\Repository\CustomerRepository;
 use App\Repository\SupplierRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\Form\Extension\Core\Type\HiddenType;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -27,7 +28,7 @@ class CustomerController extends AbstractController
     public function getAllCustomer(CustomerRepository $customerRepository): Response
     {
         $customers = $customerRepository->findAll();
-//        dd($customers[0]->getPhoneNumber());
+//        dd($customers);
 
         return $this->render('customer/all.html.twig', [
             'customers' => $customers
@@ -52,5 +53,31 @@ class CustomerController extends AbstractController
         return $this->render('customer/add.html.twig', [
             'form' => $form
         ]);
+    }
+
+    #[Route('/customer/edit/{id}', name: 'app_customer_edit')]
+    public function editAction(CustomerRepository $customerRepository, Request $request, Customer $customer): Response
+    {
+        $form = $this->createForm(AddCustomerType::class, $customer);
+        $form->handleRequest($request);
+
+        if($form->isSubmitted() && $form->isValid()){
+            $customer = $form->getData();
+            $customerRepository->save($customer, true);
+
+            return $this->redirectToRoute('app_customer_all');
+        }
+
+        return $this->render('customer/edit.html.twig', [
+            'form' => $form
+        ]);
+    }
+
+    #[Route('/customer/delete/{id}', name: 'app_customer_delete')]
+    public function deleteAction(Customer $customer, CustomerRepository $customerRepository): Response
+    {
+        $customerRepository->remove($customer, true);
+
+        return $this->redirectToRoute('app_customer_all');
     }
 }

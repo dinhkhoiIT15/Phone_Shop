@@ -5,6 +5,7 @@ namespace App\Controller;
 use App\Entity\Supplier;
 use App\Form\AddSupplierType;
 use App\Repository\CustomerRepository;
+use App\Repository\PhoneRepository;
 use App\Repository\SupplierRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -29,7 +30,7 @@ class SupplierController extends AbstractController
         $form = $this->createForm(AddSupplierType::class, $supplier);
 
         $form->handleRequest($request);
-        if ($form->isSubmitted() && $form->isValid()) {
+        if($form->isSubmitted() && $form->isValid()){
             $supplier = $form->getData();
             $supplierRepository->save($supplier, true);
             $this->addFlash('success', 'Adding supplier successfully!');
@@ -51,7 +52,6 @@ class SupplierController extends AbstractController
             'suppliers' => $suppliers
         ]);
     }
-
     #[Route('/supplier/{name}', name: 'app_supplier_by_name')]
     public function getPhoneByName(SupplierRepository $supplierRepository, string $name): Response
     {
@@ -59,7 +59,5 @@ class SupplierController extends AbstractController
         return $this->render('supplier/all.html.twig', [
             'suppliers' => $suppliers
         ]);
-
     }
 }
-

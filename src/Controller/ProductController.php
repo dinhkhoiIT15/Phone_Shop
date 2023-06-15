@@ -2,7 +2,9 @@
 
 namespace App\Controller;
 
+use App\Entity\Customer;
 use App\Entity\Product;
+use App\Form\AddCustomerType;
 use App\Form\AddProductType;
 use App\Repository\PhoneRepository;
 use App\Repository\ProductRepository;
@@ -28,17 +30,15 @@ class ProductController extends AbstractController
     public function addProductAction(Request $request, ProductRepository $productRepository): Response
     {
         $product = new Product();
-        $form = $this->createFormBuilder($product)
-            ->add('pro_name', TextType::class, ['label_attr' => ['class' => 'form-label'],
-                'attr' => ['class' => 'form-control']])
-            ->add('save', SubmitType::class, ['attr' => ['class' => 'btn btn-success']])
-            ->getForm();
+
+        $form = $this->createForm(AddProductType::class, $product);
 
         $form->handleRequest($request);
-        if ($form->isSubmitted() && $form->isValid()){
+        if($form->isSubmitted() && $form->isValid()){
+            $product = $form->getData();
             $productRepository->save($product, true);
 //            $this->addFlash('success', 'Adding product successfully!');
-//            return $this->redirectToRoute('app_product_add');
+            return $this->redirectToRoute('app_product_add');
         }
 
         return $this->render('product/add.html.twig', [
@@ -71,6 +71,26 @@ class ProductController extends AbstractController
         $products = $productRepository->getProductByName($name);
         return $this->render('product/all.html.twig', [
             'products' => $products
+        ]);
+    }
+
+    #[Route('/product/edit/{id}', name: 'app_product_edit')]
+    public function editAction(Request $request, ProductRepository $productRepository, Product $product): Response
+    {
+        $form = $this->createForm(AddProductType::class, $product);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $product = $form->getData();
+            $productRepository->save($product, true);
+
+
+//            $this->addFlash('success', 'Customer information has been successfully updated');
+            return $this->redirectToRoute('app_product_all');
+        }
+
+        return $this->render('product/edit.html.twig', [
+            'form' => $form->createView()
         ]);
     }
 }

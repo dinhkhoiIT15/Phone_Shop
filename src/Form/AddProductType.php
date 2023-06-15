@@ -17,4 +17,12 @@ class AddProductType extends AbstractType
             'data_class' => Product::class
         ]);
     }
+
+    public function buildForm(FormBuilderInterface $builder, array $options)
+    {
+        $builder
+            ->add('pro_name', TextType::class, ['label_attr' => ['class' => 'form-label'],
+                'attr' => ['class' => 'form-control']])
+            ->add('save', SubmitType::class, ['attr' => ['class' => 'btn btn-success']]);
+    }
 }
