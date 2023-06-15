@@ -80,4 +80,12 @@ class CustomerController extends AbstractController
 
         return $this->redirectToRoute('app_customer_all');
     }
+
+    #[Route('/customer/details/{id}', name: 'app_customer_details')]
+    public function customerDetails(Customer $customer): Response
+    {
+        return $this->render('customer/details.html.twig', [
+            'customer' => $customer
+        ]);
+    }
 }

@@ -4,7 +4,6 @@
 
 {% block body %}
     <h1>Customer list</h1>
-    <div class="container">
         <table class="table table-striped">
             <thead>
             <tr>
@@ -25,10 +24,10 @@
                     <td>
                         <a class="btn btn-warning" href="{{ path('app_customer_edit', {'id': customer.id}) }}">Edit</a>
                         <a class="btn btn-danger" href="{{ path('app_customer_delete', {'id': customer.id}) }}">Delete</a>
+                        <a class="btn btn-primary" href="{{ path('app_customer_details', {'id' :customer.id}) }}">Detail</a>
                     </td>
                 </tr>
             {% endfor %}
             </tbody>
         </table>
-    </div>
 {% endblock %}
