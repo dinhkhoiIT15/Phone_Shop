@@ -9,7 +9,6 @@ use App\Form\AddSupplierType;
 use App\Repository\CustomerRepository;
 use App\Repository\SupplierRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
-use Symfony\Component\Form\Extension\Core\Type\HiddenType;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -54,22 +53,24 @@ class CustomerController extends AbstractController
             'form' => $form
         ]);
     }
-
     #[Route('/customer/edit/{id}', name: 'app_customer_edit')]
-    public function editAction(CustomerRepository $customerRepository, Request $request, Customer $customer): Response
+    public function editAction(Request $request, CustomerRepository $customerRepository, Customer $customer): Response
     {
         $form = $this->createForm(AddCustomerType::class, $customer);
+        //dd($shoe);
         $form->handleRequest($request);
 
-        if($form->isSubmitted() && $form->isValid()){
+        if ($form->isSubmitted() && $form->isValid()) {
             $customer = $form->getData();
             $customerRepository->save($customer, true);
 
+
+            $this->addFlash('success', 'Customer information has been successfully updated');
             return $this->redirectToRoute('app_customer_all');
         }
 
         return $this->render('customer/edit.html.twig', [
-            'form' => $form
+            'form' => $form->createView()
         ]);
     }
 
