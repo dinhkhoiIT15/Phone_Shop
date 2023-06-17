@@ -84,6 +84,13 @@ class SupplierController extends AbstractController
         return $this->render('supplier/edit.html.twig', [
             'form' =>$form
         ]);
+    }
 
+    #[Route('/supplier/details/{id}', name: 'app_supplier_details')]
+    public function supplierDetails(Supplier $supplier): Response
+    {
+        return $this->render('supplier/details.html.twig', [
+            'supplier' => $supplier
+        ]);
     }
 }

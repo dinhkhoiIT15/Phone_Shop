@@ -6,21 +6,17 @@
     <h1>Customer list</h1>
         <table class="table table-striped">
             <thead>
-            <tr>
+            <tr class="text-center">
                 <th scope="col">Id</th>
                 <th scope="col">Name</th>
-                <th scope="col">Address</th>
-                <th scope="col">Phone number</th>
                 <th scope="col">Actions</th>
             </tr>
             </thead>
             <tbody>
             {% for customer in customers %}
-                <tr>
+                <tr class="text-center">
                     <td>{{ customer.id }}</td>
                     <td>{{ customer.name }}</td>
-                    <td>{{ customer.address }}</td>
-                    <td>{{ customer.phoneNumber}}</td>
                     <td>
                         <a class="btn btn-warning" href="{{ path('app_customer_edit', {'id': customer.id}) }}">Edit</a>
                         <a class="btn btn-danger" href="{{ path('app_customer_delete', {'id': customer.id}) }}">Delete</a>

@@ -6,26 +6,23 @@
     <h1>Phone list</h1>
         <table class="table table-striped">
             <thead>
-            <tr>
+            <tr class="text-center">
                 <th scope="col">Id</th>
                 <th scope="col">Phone Name</th>
-                <th scope="col">Product ID</th>
                 <th scope="col">Price</th>
-                <th scope="col">Date</th>
                 <th scope="col">Actions</th>
             </tr>
             </thead>
             <tbody>
             {% for phone in phones %}
-                <tr>
+                <tr class="text-center">
                     <td>{{ phone.id }}</td>
                     <td>{{ phone.phoneName }}</td>
-                    <td>{{ phone.Product.id }}</td>
                     <td>{{ phone.price}}</td>
-                    <td>{{ phone.date|date('d/m/y H:i')}}</td>
                     <td>
                         <a class="btn btn-warning" href="{{ path('app_phone_edit', {'id' :phone.id}) }}">Edit</a>
                         <a class="btn btn-danger" href="{{ path('app_phone_delete', {'id' :phone.id}) }}">Delete</a>
+                        <a class="btn btn-primary" href="{{ path('app_phone_details', {'id' :phone.id}) }}">Detail</a>
                     </td>
                 </tr>
             {% endfor %}

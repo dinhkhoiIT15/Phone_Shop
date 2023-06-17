@@ -91,4 +91,12 @@ class PhoneController extends AbstractController
 
         return $this->redirectToRoute('app_phone_all');
     }
+
+    #[Route('/phone/details/{id}', name: 'app_phone_details')]
+    public function customerDetails(Phone $phone): Response
+    {
+        return $this->render('phone/details.html.twig', [
+            'phone' => $phone
+        ]);
+    }
 }
