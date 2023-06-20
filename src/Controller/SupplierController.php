@@ -79,7 +79,7 @@ class SupplierController extends AbstractController
             $supplierRepository->save($supplier, true);
 
             $this->addFlash('success', 'Supplier information have been update');
-            return $this->redirectToRoute('app_supplier_edit');
+            return $this->redirectToRoute('app_supplier_all');
         }
         return $this->render('supplier/edit.html.twig', [
             'form' =>$form

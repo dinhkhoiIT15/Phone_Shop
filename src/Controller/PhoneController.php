@@ -71,7 +71,7 @@ class PhoneController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $customer = $form->getData();
+            $phone = $form->getData();
             $phoneRepository->save($phone, true);
 
 
