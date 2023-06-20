@@ -1,0 +1,31 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Sale list{% endblock %}
+
+{% block body %}
+    <h1>Customer list</h1>
+    <table class="table table-striped">
+        <thead>
+        <tr class="text-center">
+            <th scope="col">Id</th>
+            <th scope="col">Name</th>
+            <th scope="col"> Phone Name</th>
+            <th scope="col">Actions</th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for sale in sales %}
+            <tr class="text-center">
+                <td>{{ sale.id }}</td>
+                <td>{{ sale.customer.name }}</td>
+                <td>{{ sale.phone.phoneName }}</td>
+                <td>
+                    <a class="btn btn-warning" href="{{ path('app_sale_edit', {'id': sale.id}) }}">Edit</a>
+                    <a class="btn btn-danger" href="{{ path('app_sale_delete', {'id': sale.id}) }}">Delete</a>
+                    <a class="btn btn-primary" href="{{ path('app_sale_details', {'id' :sale.id}) }}">Detail</a>
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+{% endblock %}

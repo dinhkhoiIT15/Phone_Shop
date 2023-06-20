@@ -1,0 +1,20 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Sale detail{% endblock %}
+
+{% block body %}
+
+    <div class="card">
+        <div class="card-header">
+            <h1>Sale detail</h1>
+        </div>
+        <div class="card-body">
+            <p class="card-text"><span class="fs-6 fw-bold">Sale ID: </span>{{ sales.id }}</p>
+            <p class="card-text"><span class="fs-6 fw-bold">Customer Name: </span>{{ sales.customer.name }}</p>
+            <p class="card-text"><span class="fs-6 fw-bold">Phone Name: </span>{{ sales.phone.phoneName }}</p>
+            <p class="card-text"><span class="fs-6 fw-bold">Price: </span>{{ sales.phone.price }}</p>
+        </div>
+    </div>
+
+
+{% endblock %}
